@@ -1,0 +1,9 @@
+name: MazeGenerator
+main: BlockHorizons\MazeGenerator\Loader
+api: 3.0.0
+version: 0.0.1
+
+commands:
+  mazegen:
+    default: op
+    usage: "/mazegen <x1> <y1> <z1> <x2> <y2> <z2>"
