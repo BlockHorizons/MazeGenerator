@@ -4,8 +4,9 @@ declare(strict_types = 1);
 
 namespace BlockHorizons\MazeGenerator\generators;
 
+use pocketmine\block\VanillaBlocks;
 use pocketmine\block\Block;
-use pocketmine\level\Level;
+use pocketmine\world\World;
 use pocketmine\math\Vector3;
 
 abstract class MazeGenerator {
@@ -65,13 +66,14 @@ abstract class MazeGenerator {
 		return $this->maxZ - $this->minZ;
 	}
 
-	public function generate(Block $wall_block, Level $level): void {
-		$pos = new Vector3();
+	public function generate(Block $wall_block, World $world): void {
 		foreach($this->generateTerrain() as $result) {
-			$pos->x = $this->minX + $result->x;
-			$pos->z = $this->minZ + $result->z;
-			for($pos->y = $this->minY; $pos->y <= $this->maxY; ++$pos->y) {
-				$level->setBlock($pos, $result->is_wall ? $wall_block : Block::get(Block::AIR), false, false);
+			$x = $this->minX + $result->x;
+			$z = $this->minZ + $result->z;
+
+			for($y = $this->minY; $y <= $this->maxY; ++$y) {
+				$pos = new Vector3($x, $y, $z);
+				$world->setBlock($pos, $result->is_wall ? $wall_block : VanillaBlocks::AIR(), false, false);
 			}
 		}
 	}

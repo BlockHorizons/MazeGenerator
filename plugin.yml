@@ -1,9 +1,14 @@
 name: MazeGenerator
 main: BlockHorizons\MazeGenerator\Loader
-api: 3.0.0
-version: 0.0.1
-
+api: 5.30.0
+version: 0.0.2
 commands:
   mazegen:
     default: op
     usage: "/mazegen <x1> <y1> <z1> <x2> <y2> <z2>"
+    permission: mazegen
+permissions:
+  mazegen:
+    default: op
+    description: Allows use of the /mazegen command
+    
